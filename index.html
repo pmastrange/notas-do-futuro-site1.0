@@ -42,7 +42,7 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         /* ========================================================
-           ESTILOS: TELA DE LOGIN & CADASTRO
+           ESTILOS: TELA DE LOGIN & CADASTRO (COM ABAS)
            ======================================================== */
         .fundo-auth {
             background-color: #343A40;
@@ -51,12 +51,23 @@
         .card-auth {
             background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.2); border-radius: 20px;
-            width: 100%; max-width: 450px; padding: 40px 30px; box-sizing: border-box; text-align: center; color: white;
+            width: 100%; max-width: 450px; padding: 30px; box-sizing: border-box; text-align: center; color: white;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
         .logo-auth { font-size: 2.2rem; font-weight: bold; margin-bottom: 5px; letter-spacing: -1px; }
-        .sub-auth { font-size: 1rem; opacity: 0.8; margin-bottom: 25px; }
+        .sub-auth { font-size: 1rem; opacity: 0.8; margin-bottom: 20px; }
         
+        /* Novas abas de seleção de tipo de usuário */
+        .abas-tipo-usuario {
+            display: flex; background: rgba(0, 0, 0, 0.2); border-radius: 10px; padding: 5px; margin-bottom: 25px;
+        }
+        .aba-btn {
+            flex: 1; padding: 10px; border: none; background: none; color: white; font-weight: bold; cursor: pointer; border-radius: 8px; transition: background 0.2s; font-size: 0.95rem;
+        }
+        .aba-btn.ativa {
+            background: var(--verde-principal); box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
         .btn-google {
             background: white; color: #333; border: none; padding: 14px; width: 100%;
             border-radius: 25px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 15px; font-size: 0.95rem;
@@ -67,7 +78,6 @@
         .campo-input label { display: block; font-size: 0.85rem; margin-bottom: 6px; opacity: 0.9; font-weight: 600; }
         .campo-input input { width: 100%; padding: 14px; border-radius: 10px; border: none; box-sizing: border-box; font-size: 0.95rem; color: #333;}
         
-        /* CONTAINER DA SENHA COM O BOTÃO DO OLHO */
         .wrapper-senha { position: relative; width: 100%; }
         .btn-olho {
             position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
@@ -86,40 +96,33 @@
         .link-alternativo span { text-decoration: underline; cursor: pointer; font-weight: bold; color: var(--amarelo-destaque); }
 
         /* ========================================================
-           ESTILOS: TELA HOME (CENTRALIZAÇÃO E CLIQUES RECALIBRADOS)
+           ESTILOS: TELA HOME (MAPA)
            ======================================================== */
         .wrapper-mapa-exclusivo {
-            position: relative;
-            width: 100%;
-            max-width: 540px; 
-            margin: 0 auto;
-            box-shadow: 0 0 30px rgba(0,0,0,0.1);
-            background: white;
+            position: relative; width: 100%; max-width: 540px; margin: 0 auto; box-shadow: 0 0 30px rgba(0,0,0,0.1); background: white;
         }
         .imagem-mapa-fundo { width: 100%; height: auto; display: block; }
         
-        /* ZONAS DE CLIQUE INVISÍVEIS RECALIBRADAS VERTICALMENTE CONFORME SEU PRINT */
-        .hotspot-regiao {
-            position: absolute;
-            cursor: pointer;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0);
-            transition: background 0.2s ease;
-        }
+        .hotspot-regiao { position: absolute; cursor: pointer; border-radius: 8px; background: rgba(255, 255, 255, 0); transition: background 0.2s ease; }
         .hotspot-regiao:hover { background: rgba(255, 255, 255, 0.18); }
 
-        /* Coordenadas ajustadas cirurgicamente para bater com o centro de cada região desenhada */
+        /* Coordenadas das Zonas de Clique */
         .click-norte        { top: 37%; left: 12%; width: 42%; height: 16%; }
         .click-nordeste     { top: 40%; left: 54%; width: 33%; height: 14%; }
         .click-centro-oeste { top: 52%; left: 30%; width: 26%; height: 13%; }
         .click-sudeste      { top: 59%; left: 54%; width: 26%; height: 15%; }
         .click-sul          { top: 73%; left: 38%; width: 20%; height: 10%; }
-        
-        /* Clique do Perfil em cima da foto do topo direito do seu banner */
         .click-perfil       { top: 1.5%; right: 4%; width: 12%; height: 6%; border-radius: 50%; }
 
+        /* Botão flutuante para o Professor voltar ao painel se estiver navegando no mapa */
+        .btn-retorno-professor {
+            position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+            background: #2C3539; color: var(--amarelo-destaque); border: 2px solid var(--amarelo-destaque);
+            padding: 12px 20px; font-weight: bold; border-radius: 30px; cursor: pointer; z-index: 99; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
         /* ========================================================
-           ESTILOS: TELA DO QUIZ (ADAPTADO PARA SEQUÊNCIA DE PERGUNTAS)
+           ESTILOS: TELA DO QUIZ
            ======================================================== */
         .conteudo-central-site { width: 100%; max-width: 600px; margin: 0 auto; padding-bottom: 20px; box-sizing: border-box; }
         .banner-regiao { color: white; text-align: center; padding: 40px 20px; position: relative; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; }
@@ -146,13 +149,12 @@
         .card-mini .thumb-icon { height: 60px; background: #D1CFC7; border-radius: 8px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; }
 
         /* ========================================================
-           ESTILOS: TELA DE PERFIL & SELETOR DE AVATARS
+           ESTILOS: TELA DE PERFIL
            ======================================================== */
         .navbar-topo { background-color: var(--verde-principal); color: white; display: flex; justify-content: space-between; align-items: center; padding: 20px; font-size: 1.1rem; }
         .container-perfil { padding: 40px 20px; text-align: center; max-width: 500px; margin: 0 auto; width: 100%; box-sizing: border-box; }
         .avatar-grande { width: 120px; height: 120px; background: var(--verde-principal); color: white; font-size: 4rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px auto; box-shadow: 0 4px 12px rgba(0,0,0,0.1); user-select: none; }
         
-        /* Fileiras de escolha de foto de perfil */
         .seletor-fotos { display: flex; justify-content: center; gap: 12px; margin: 10px 0 25px 0; }
         .opcao-avatar { font-size: 2.2rem; cursor: pointer; padding: 6px; border: 2px solid transparent; border-radius: 50%; transition: transform 0.2s, background 0.2s; }
         .opcao-avatar:hover { transform: scale(1.25); background: #E0DBCF; }
@@ -162,7 +164,7 @@
         .info-perfil-box span { display: block; font-weight: normal; color: #333; margin-top: 6px; border-bottom: 2px solid var(--cor-bege); padding-bottom: 4px; font-size: 1.05rem; }
 
         /* ========================================================
-           NOVO: ESTILOS DO PAINEL DO PROFESSOR (DASHBOARD)
+           ESTILOS: PAINEL DO PROFESSOR (DASHBOARD)
            ======================================================== */
         .dashboard-professor {
             background-color: #2C3539; color: white; padding: 30px; border-radius: 15px;
@@ -181,7 +183,6 @@
         th { background-color: #1A2123; color: #BDC3C7; }
         tr:hover { background-color: #2C3539; }
         
-        /* Gráfico de Barras Puras CSS */
         .barra-container { display: flex; align-items: center; margin-bottom: 12px; }
         .label-regiao { width: 110px; font-weight: bold; font-size: 0.9rem; }
         .barra-fundo { flex: 1; background: #1A2123; height: 16px; border-radius: 8px; margin: 0 15px; overflow: hidden; }
@@ -196,16 +197,27 @@
 </head>
 <body>
 
+    <!-- TELA 1: LOGIN -->
     <div id="tela-login" class="tela ativa">
         <div class="fundo-auth">
             <div class="card-auth">
                 <div class="logo-auth">NOTAS DO FUTURO</div>
-                <div class="sub-auth">Bem-vindo(a) de volta!</div>
-                <button class="btn-google" onclick="mudarTela('tela-home')">🌐 Continuar com Google</button>
-                <div class="divisor">Ou insira seu Login</div>
+                <div class="sub-auth">Selecione o seu tipo de acesso:</div>
+                
+                <!-- Abas Dedicadas de Seleção -->
+                <div class="abas-tipo-usuario">
+                    <button id="btn-aba-aluno" class="aba-btn ativa" onclick="mudarTipoAcesso('aluno')">Aluno</button>
+                    <button id="btn-aba-prof" class="aba-btn" onclick="mudarTipoAcesso('professor')">Professor</button>
+                </div>
+
+                <div id="container-social-google">
+                    <button class="btn-google" onclick="mudarTela('tela-home')">🌐 Continuar com Google</button>
+                    <div class="divisor">Ou insira seu Login</div>
+                </div>
+
                 <div class="campo-input">
-                    <label>E-mail</label>
-                    <input type="email" id="login-email" placeholder="aluno.es@umc.edu.br">
+                    <label>E-mail Acadêmico</label>
+                    <input type="email" id="login-email" placeholder="aluno.es@escola.edu.br">
                 </div>
                 <div class="campo-input">
                     <label>Senha</label>
@@ -215,12 +227,13 @@
                     </div>
                     <span class="dica-senha">⚠️ Mínimo 8 caracteres</span>
                 </div>
-                <button class="btn-principal" onclick="executarLogin()">Entrar</button>
-                <div class="link-alternativo">Não tem uma conta? <span onclick="mudarTela('tela-cadastro')">Junte-se a nós</span></div>
+                <button class="btn-principal" id="btn-acao-login" onclick="executarLogin()">Entrar como Aluno</button>
+                <div class="link-alternativo" id="link-registro-aluno">Não tem uma conta? <span onclick="mudarTela('tela-cadastro')">Junte-se a nós</span></div>
             </div>
         </div>
     </div>
 
+    <!-- TELA 2: CADASTRO -->
     <div id="tela-cadastro" class="tela">
         <div class="fundo-auth">
             <div class="card-auth">
@@ -232,7 +245,7 @@
                 </div>
                 <div class="campo-input">
                     <label>E-mail</label>
-                    <input type="email" id="cad-email" placeholder="seu-email@umc.br">
+                    <input type="email" id="cad-email" placeholder="seu-email@escola.br">
                 </div>
                 <div class="campo-input">
                     <label>Senha</label>
@@ -248,6 +261,7 @@
         </div>
     </div>
 
+    <!-- TELA 3: HOME (MAPA) -->
     <div id="tela-home" class="tela">
         <div class="wrapper-mapa-exclusivo">
             <img src="mapa.jpg" class="imagem-mapa-fundo" alt="Interface Notas do Futuro">
@@ -259,9 +273,13 @@
             <div class="hotspot-regiao click-sul" onclick="iniciarQuizRegiao('Sul')"></div>
             
             <div class="hotspot-regiao click-perfil" onclick="mudarTela('tela-perfil')"></div>
+
+            <!-- Botão flutuante caso o Professor queira voltar ao painel dele -->
+            <button id="btn-voltar-dash" class="btn-retorno-professor" style="display: none;" onclick="mudarTela('tela-professor')">🛠️ Voltar ao Painel do Docente</button>
         </div>
     </div>
 
+    <!-- TELA 4: QUIZ INTERATIVO -->
     <div id="tela-quiz" class="tela">
         <div class="conteudo-central-site">
             <div class="banner-regiao" id="quiz-banner">
@@ -284,6 +302,7 @@
         </div>
     </div>
 
+    <!-- TELA 5: PERFIL -->
     <div id="tela-perfil" class="tela">
         <div class="navbar-topo">
             <button style="background:none; border:none; color:white; font-weight:bold; cursor:pointer; font-size:1rem;" onclick="mudarTela('tela-home')">⬅ Voltar para o Jogo</button>
@@ -304,21 +323,25 @@
 
             <div class="info-perfil-box">
                 <div>Nome do Aluno: <span id="perfil-nome">Estudante UMC</span></div>
-                <div>E-mail Registrado: <span id="perfil-email">aluno.es@umc.edu.br</span></div>
+                <div>E-mail Registrado: <span id="perfil-email">aluno.es@escola.edu.br</span></div>
                 <div>Nota até o Momento (Pontuação): <span id="perfil-xp-contador" style="color:var(--cor-correta); font-weight:bold; font-size:1.2rem;">0 XP 🚀</span></div>
             </div>
             <button class="btn-principal" style="background-color: var(--cor-errada);" onclick="mudarTela('tela-login')">Sair do Painel</button>
         </div>
     </div>
 
+    <!-- TELA 6: PAINEL DO PROFESSOR (DASHBOARD DOCENTE) -->
     <div id="tela-professor" class="tela">
         <div class="dashboard-professor">
             <div class="dash-header">
                 <div>
-                    <h2 style="margin:0; font-size:1.5rem;">Painel do Docente - UMC</h2>
+                    <h2 style="margin:0; font-size:1.5rem;">Painel do Docente - ESCOLA</h2>
                     <p style="margin:5px 0 0 0; opacity:0.7; font-size:0.9rem;">Gestão de Engenharia de Software 2026</p>
                 </div>
-                <button class="btn-principal" style="background-color:var(--cor-errada); margin:0; padding:10px 20px; width:auto; border-radius:5px;" onclick="mudarTela('tela-login')">Sair do Painel</button>
+                <div style="display:flex; gap:10px;">
+                    <button class="btn-principal" style="background-color:var(--verde-principal); margin:0; padding:10px 20px; width:auto; border-radius:5px;" onclick="mudarTela('tela-home')">👁️ Visualizar Mapa (Como Aluno)</button>
+                    <button class="btn-principal" style="background-color:var(--cor-errada); margin:0; padding:10px 20px; width:auto; border-radius:5px;" onclick="mudarTela('tela-login')">Sair do Painel</button>
+                </div>
             </div>
 
             <div class="cards-metricas">
@@ -386,13 +409,14 @@
         </div>
     </div>
 
+    <!-- JAVASCRIPT INTEGRADO -->
     <script>
         const bancoDados = {
             "Norte": {
                 escuro: "var(--norte-escuro)", claro: "var(--norte-claro)",
                 perguntas: [
                     { p: "Qual é o nome da maior floresta tropical do mundo presente no Amazonas?", alts: [{ t: "A) Floresta Amazônica", c: true }, { t: "B) Mata Atlântica", c: false }, { t: "C) Caatinga", c: false }, { t: "D) Pantanal", c: false }] },
-                    { p: "Qual é o maior estado da Região Norte em extensão territorial?", alts: [{ t: "A) Pará", c: false }, { t: "B) Amazonas", c: true }, { t: "C) Tocantins", c: false }, { t: "D) Amapá", c: false }] },
+                    { p: "Qual é o maior estado da Região Norte in extensão territorial?", alts: [{ t: "A) Pará", c: false }, { t: "B) Amazonas", c: true }, { t: "C) Tocantins", c: false }, { t: "D) Amapá", c: false }] },
                     { p: "Qual famosa festa cultural dos bois Garantido e Caprichoso acontece no Amazonas?", alts: [{ t: "A) Círio de Nazaré", c: false }, { t: "B) Festival de Parintins", c: true }, { t: "C) Festa de São João", c: false }, { t: "D) Festival de Manaus", c: false }] }
                 ],
                 jogos: ["Batidas da Amazônia", "Sons da Selva", "Ritmos Indígenas"], icones: ["🎵", "🌳", "🏹"]
@@ -410,7 +434,7 @@
                 escuro: "var(--centro-escuro)", claro: "var(--centro-claro)",
                 perguntas: [
                     { p: "Qual bioma de planície inundável atrai turistas para o Mato Grosso do Sul?", alts: [{ t: "A) Pantanal", c: true }, { t: "B) Amazônia", c: false }, { t: "C) Caatinga", c: false }, { t: "D) Pampa", c: false }] },
-                    { p: "Qual cidade planejada foi inaugurada in 1960 para ser a atual capital federal do país?", alts: [{ t: "A) Rio de Janeiro", c: false }, { t: "B) Goiânia", c: false }, { t: "C) Brasília", c: true }, { t: "D) Cuiabá", c: false }] },
+                    { p: "Qual cidade planejada foi inaugurada em 1960 para ser a atual capital federal do país?", alts: [{ t: "A) Rio de Janeiro", c: false }, { t: "B) Goiânia", c: false }, { t: "C) Brasília", c: true }, { t: "D) Cuiabá", c: false }] },
                     { p: "Qual gênero de música de raiz e dancinha country é o polo econômico e cultural de Goiás?", alts: [{ t: "A) Funk", c: false }, { t: "B) Sertanejo", c: true }, { t: "C) Rock", c: false }, { t: "D) MPB", c: false }] }
                 ],
                 jogos: ["Pantanal Selvagem", "Cerrado Protegido", "Planalto Central"], icones: ["🐆", "🌱", "🏛️"]
@@ -440,12 +464,13 @@
         let regiaoAtivaNome = "";
         let indicePerguntaFase = 0;
         let emailUsuarioLogado = "";
+        let tipoAcessoSelecionado = "aluno"; // 'aluno' ou 'professor'
 
         // BANCO DE DADOS LOCAL (MOCK SIMULADO)
         const alunosIniciais = [
-            { nome: "Ana Beatriz", email: "ana.silva@umc.edu.br", regioes: "Sudeste, Sul", xp: 60 },
-            { nome: "Carlos Eduardo", email: "carlos.s@umc.edu.br", regioes: "Sudeste", xp: 30 },
-            { nome: "Rodrigo Almeida", email: "aluno.es@umc.edu.br", regioes: "Nenhuma", xp: 0 }
+            { nome: "Ana Beatriz", email: "ana.silva@escola.edu.br", regioes: "Sudeste, Sul", xp: 60 },
+            { nome: "Carlos Eduardo", email: "carlos.s@escola.edu.br", regioes: "Sudeste", xp: 30 },
+            { nome: "Rodrigo Almeida", email: "aluno.es@escola.edu.br", regioes: "Nenhuma", xp: 0 }
         ];
 
         if (!localStorage.getItem('bancoAlunos')) {
@@ -457,9 +482,48 @@
             input.type = (input.type === "password") ? "text" : "password";
         }
 
+        // CONTROLADOR DE ABAS DE INTERFACE DE LOGIN
+        function mudarTipoAcesso(tipo) {
+            tipoAcessoSelecionado = tipo;
+            document.getElementById('btn-aba-aluno').classList.remove('ativa');
+            document.getElementById('btn-aba-prof').classList.remove('ativa');
+            
+            const inputEmail = document.getElementById('login-email');
+            const inputSenha = document.getElementById('senha-login');
+            const btnAcao = document.getElementById('btn-acao-login');
+            const containerGoogle = document.getElementById('container-social-google');
+            const linkRegistro = document.getElementById('link-registro-aluno');
+
+            if (tipo === 'aluno') {
+                document.getElementById('btn-aba-aluno').classList.add('ativa');
+                inputEmail.value = "";
+                inputEmail.placeholder = "aluno.es@escola.edu.br";
+                inputSenha.value = "";
+                btnAcao.innerText = "Entrar como Aluno";
+                containerGoogle.style.display = "block";
+                linkRegistro.style.display = "block";
+            } else {
+                document.getElementById('btn-aba-prof').classList.add('ativa');
+                // Auto preenche para facilitar testes da banca/professor
+                inputEmail.value = "professor@escola.edu.br"; 
+                inputSenha.value = "umc2026";
+                btnAcao.innerText = "Acessar Painel do Docente";
+                containerGoogle.style.display = "none";
+                linkRegistro.style.display = "none";
+            }
+        }
+
         function mudarTela(idTela) {
             document.querySelectorAll('.tela').forEach(t => t.classList.remove('ativa'));
             document.getElementById(idTela).classList.add('ativa');
+
+            // Exibir ou ocultar o botão de retorno ao painel caso seja o professor espiando o mapa
+            const btnVoltarDash = document.getElementById('btn-voltar-dash');
+            if (idTela === 'tela-home' && emailUsuarioLogado === "PROFESSOR") {
+                btnVoltarDash.style.display = "block";
+            } else {
+                btnVoltarDash.style.display = "none";
+            }
 
             if (idTela === 'tela-professor') {
                 carregarPainelProfessor();
@@ -469,7 +533,7 @@
             }
         }
 
-        // SISTEMA DE LOGIN COM SEPARAÇÃO DE NÍVEL (ALUNO VS PROFESSOR)
+        // SISTEMA DE VALIDAÇÃO DE LOGIN POR REGRA
         function executarLogin() {
             const email = document.getElementById('login-email').value.trim();
             const senha = document.getElementById('senha-login').value;
@@ -479,14 +543,17 @@
                 return;
             }
 
-            // Acesso Master do Professor
-            if (email === "professor@escola.edu.br" && senha === "umc2026") {
-                emailUsuarioLogado = "PROFESSOR";
-                mudarTela('tela-professor');
+            if (tipoAcessoSelecionado === "professor") {
+                if (email === "professor@escola.edu.br" && senha === "umc2026") {
+                    emailUsuarioLogado = "PROFESSOR";
+                    mudarTela('tela-professor');
+                } else {
+                    alert("Credenciais de Professor incorretas!\nUse: professor@escola.edu.br / umc2026");
+                }
                 return;
             }
 
-            // Busca de Aluno no Banco Local
+            // Fluxo Aluno
             const bancoAlunos = JSON.parse(localStorage.getItem('bancoAlunos'));
             const aluno = bancoAlunos.find(a => a.email === email);
 
@@ -496,11 +563,10 @@
                 alert(`Olá, ${aluno.nome}! Bom jogo.`);
                 mudarTela('tela-home');
             } else {
-                alert("Usuário não cadastrado! Para testar como docente use:\nE-mail: professor@escola.edu.br\nSenha: umc2026");
+                alert("Usuário Aluno não encontrado no banco local!");
             }
         }
 
-        // SISTEMA DE CADASTRO REAL COM PERSISTÊNCIA LOCAL
         function executarCadastro() {
             const nome = document.getElementById('cad-nome').value.trim();
             const email = document.getElementById('cad-email').value.trim();
@@ -512,7 +578,7 @@
             }
 
             if (senha.length < 8) {
-                alert("Por motivos de segurança acadêmica, a senha deve conter ao menos 8 caracteres.");
+                alert("A senha deve conter ao menos 8 caracteres.");
                 return;
             }
 
@@ -523,15 +589,10 @@
                 return;
             }
 
-            bancoAlunos.push({
-                nome: nome,
-                email: email,
-                regioes: "Nenhuma",
-                xp: 0
-            });
-
+            bancoAlunos.push({ nome: nome, email: email, regioes: "Nenhuma", xp: 0 });
             localStorage.setItem('bancoAlunos', JSON.stringify(bancoAlunos));
             alert("Cadastro concluído com sucesso! Prossiga com o Login.");
+            mudarTipoAcesso('aluno');
             mudarTela('tela-login');
         }
 
@@ -544,6 +605,10 @@
                     document.getElementById('perfil-email').innerText = aluno.email;
                     document.getElementById('perfil-xp-contador').innerText = aluno.xp + " XP 🚀";
                 }
+            } else if (emailUsuarioLogado === "PROFESSOR") {
+                document.getElementById('perfil-nome').innerText = "Professor Administrador";
+                document.getElementById('perfil-email').innerText = "professor@escola.edu.br";
+                document.getElementById('perfil-xp-contador').innerText = "N/A (Modo Admin)";
             }
         }
 
@@ -568,7 +633,6 @@
             }
         }
 
-        // CARREGA E INJETA DADOS DINÂMICOS NO DASHBOARD DO PROFESSOR
         function carregarPainelProfessor() {
             const bancoAlunos = JSON.parse(localStorage.getItem('bancoAlunos'));
             const tabelaCorpo = document.querySelector('#tabela-alunos tbody');
@@ -649,8 +713,10 @@
             if (ehCorreta) {
                 btnClicado.classList.add('correta');
                 feedback.innerHTML = "<span style='color:var(--cor-correta)'>🎉 Resposta Correta! +10 XP</span>";
-                notaXPGlobal += 10;
-                sincronizarProgressoNoBanco(false);
+                if (emailUsuarioLogado !== "PROFESSOR") {
+                    notaXPGlobal += 10;
+                    sincronizarProgressoNoBanco(false);
+                }
             } else {
                 btnClicado.classList.add('errada');
                 feedback.innerHTML = "<span style='color:var(--cor-errada)'>❌ Resposta Incorreta!</span>";
@@ -666,7 +732,7 @@
             btnAvanco.style.display = "block";
         }
 
-        function avancarPerguntaQuiz() {
+        function avanzarPerguntaQuiz() {
             if (indicePerguntaFase < 2) {
                 indicePerguntaFase++;
                 carregarQuestaoEspecifica();
@@ -674,10 +740,6 @@
                 sincronizarProgressoNoBanco(regiaoAtivaNome);
                 mudarTela('tela-home');
             }
-        }
-
-        function atualizarExibicaoPontosPerfil() {
-            document.getElementById('perfil-xp-contador').innerText = notaXPGlobal + " XP 🚀";
         }
 
         function atualizarFotoPerfil(emojiSelecionado) {
