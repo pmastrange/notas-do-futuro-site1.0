@@ -46,7 +46,7 @@
            ======================================================== */
         .fundo-auth {
             background-color: #343A40;
-            padding: 40px 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; box-sizing: border-box; width: 100%;
+            padding: 40px 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; box-shadow: border-box; width: 100%; box-sizing: border-box;
         }
         .card-auth {
             background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
@@ -65,13 +65,13 @@
         
         .campo-input { width: 100%; margin-bottom: 20px; text-align: left; box-sizing: border-box;}
         .campo-input label { display: block; font-size: 0.85rem; margin-bottom: 6px; opacity: 0.9; font-weight: 600; }
-        .campo-input input { width: 100%; padding: 14px; border-radius: 10px; border: none; box-sizing: border-box; font-size: 0.95rem;}
+        .campo-input input { width: 100%; padding: 14px; border-radius: 10px; border: none; box-sizing: border-box; font-size: 0.95rem; color: #333;}
         
         /* CONTAINER DA SENHA COM O BOTÃO DO OLHO */
         .wrapper-senha { position: relative; width: 100%; }
         .btn-olho {
             position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
-            background: none; border: none; color: white; cursor: pointer; font-size: 1.2rem;
+            background: none; border: none; color: #333; cursor: pointer; font-size: 1.2rem;
             opacity: 0.7; transition: opacity 0.2s; padding: 0; margin: 0;
         }
         .btn-olho:hover { opacity: 1; }
@@ -160,11 +160,42 @@
         .info-perfil-box { background: white; padding: 25px; border-radius: 15px; text-align: left; box-shadow: 0 6px 15px rgba(0,0,0,0.05); margin-bottom: 25px; }
         .info-perfil-box div { margin-bottom: 16px; font-weight: bold; color: #555; font-size: 0.95rem; }
         .info-perfil-box span { display: block; font-weight: normal; color: #333; margin-top: 6px; border-bottom: 2px solid var(--cor-bege); padding-bottom: 4px; font-size: 1.05rem; }
+
+        /* ========================================================
+           NOVO: ESTILOS DO PAINEL DO PROFESSOR (DASHBOARD)
+           ======================================================== */
+        .dashboard-professor {
+            background-color: #2C3539; color: white; padding: 30px; border-radius: 15px;
+            max-width: 900px; width: 95%; margin: 30px auto; box-sizing: border-box;
+        }
+        .dash-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #424A4D; padding-bottom: 15px; margin-bottom: 25px; }
+        .cards-metricas { display: flex; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; }
+        .cards-metricas .card { flex: 1; min-width: 200px; background: #232B2E; padding: 20px; border-radius: 10px; text-align: center; border-left: 5px solid var(--amarelo-destaque); }
+        .cards-metricas .card h3 { font-size: 0.9rem; color: #BDC3C7; margin: 0 0 10px 0; text-transform: uppercase; }
+        .cards-metricas .card p { font-size: 1.8rem; font-weight: bold; margin: 0; }
+        .dash-secao { background: #232B2E; padding: 20px; border-radius: 10px; margin-bottom: 25px; }
+        .dash-secao h3 { margin: 0 0 15px 0; color: var(--amarelo-destaque); font-size: 1.1rem; }
+        .tabela-wrapper { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem; }
+        th, td { padding: 12px; border-bottom: 1px solid #424A4D; }
+        th { background-color: #1A2123; color: #BDC3C7; }
+        tr:hover { background-color: #2C3539; }
+        
+        /* Gráfico de Barras Puras CSS */
+        .barra-container { display: flex; align-items: center; margin-bottom: 12px; }
+        .label-regiao { width: 110px; font-weight: bold; font-size: 0.9rem; }
+        .barra-fundo { flex: 1; background: #1A2123; height: 16px; border-radius: 8px; margin: 0 15px; overflow: hidden; }
+        .barra-progresso { height: 100%; border-radius: 8px; }
+        .barra-progresso.norte { background: var(--norte-escuro); }
+        .barra-progresso.nordeste { background: var(--nordeste-escuro); }
+        .barra-progresso.centro { background: var(--centro-escuro); }
+        .barra-progresso.sudeste { background: var(--sudeste-escuro); }
+        .barra-progresso.sul { background: var(--sul-escuro); }
+        .porcentagem { width: 110px; text-align: right; font-size: 0.85rem; color: #BDC3C7; }
     </style>
 </head>
 <body>
 
-    <!-- TELA 1: LOGIN -->
     <div id="tela-login" class="tela ativa">
         <div class="fundo-auth">
             <div class="card-auth">
@@ -174,7 +205,7 @@
                 <div class="divisor">Ou insira seu Login</div>
                 <div class="campo-input">
                     <label>E-mail</label>
-                    <input type="email" value="aluno.es@umc.edu.br">
+                    <input type="email" id="login-email" placeholder="aluno.es@umc.edu.br">
                 </div>
                 <div class="campo-input">
                     <label>Senha</label>
@@ -184,13 +215,12 @@
                     </div>
                     <span class="dica-senha">⚠️ Mínimo 8 caracteres</span>
                 </div>
-                <button class="btn-principal" onclick="mudarTela('tela-home')">Entrar</button>
+                <button class="btn-principal" onclick="executarLogin()">Entrar</button>
                 <div class="link-alternativo">Não tem uma conta? <span onclick="mudarTela('tela-cadastro')">Junte-se a nós</span></div>
             </div>
         </div>
     </div>
 
-    <!-- TELA 2: CADASTRO -->
     <div id="tela-cadastro" class="tela">
         <div class="fundo-auth">
             <div class="card-auth">
@@ -198,11 +228,11 @@
                 <div class="sub-auth">Explore o Brasil conosco</div>
                 <div class="campo-input">
                     <label>Nome Completo</label>
-                    <input type="text" placeholder="Seu nome">
+                    <input type="text" id="cad-nome" placeholder="Seu nome">
                 </div>
                 <div class="campo-input">
                     <label>E-mail</label>
-                    <input type="email" placeholder="seu-email@umc.br">
+                    <input type="email" id="cad-email" placeholder="seu-email@umc.br">
                 </div>
                 <div class="campo-input">
                     <label>Senha</label>
@@ -212,30 +242,26 @@
                     </div>
                     <span class="dica-senha">⚠️ Mínimo 8 caracteres</span>
                 </div>
-                <button class="btn-principal" onclick="mudarTela('tela-home')">Cadastrar</button>
+                <button class="btn-principal" onclick="executarCadastro()">Cadastrar</button>
                 <div class="link-alternativo">Já tem uma conta? <span onclick="mudarTela('tela-login')">Entrar</span></div>
             </div>
         </div>
     </div>
 
-    <!-- TELA 3: HOME (MANTÉM PURA A SUA FOTO DO MAPA COM OS BOTÕES CERTOS) -->
     <div id="tela-home" class="tela">
         <div class="wrapper-mapa-exclusivo">
             <img src="mapa.jpg" class="imagem-mapa-fundo" alt="Interface Notas do Futuro">
             
-            <!-- Botões invisíveis centralizados perfeitamente em cima de cada região do seu desenho -->
             <div class="hotspot-regiao click-norte" onclick="iniciarQuizRegiao('Norte')"></div>
             <div class="hotspot-regiao click-nordeste" onclick="iniciarQuizRegiao('Nordeste')"></div>
             <div class="hotspot-regiao click-centro-oeste" onclick="iniciarQuizRegiao('Centro-Oeste')"></div>
             <div class="hotspot-regiao click-sudeste" onclick="iniciarQuizRegiao('Sudeste')"></div>
             <div class="hotspot-regiao click-sul" onclick="iniciarQuizRegiao('Sul')"></div>
             
-            <!-- Botão invisível do perfil linkado à foto do topo direito da sua imagem -->
             <div class="hotspot-regiao click-perfil" onclick="mudarTela('tela-perfil')"></div>
         </div>
     </div>
 
-    <!-- TELA 4: QUIZ INTERATIVO (AGORA COM MULTIPERGUNTAS) -->
     <div id="tela-quiz" class="tela">
         <div class="conteudo-central-site">
             <div class="banner-regiao" id="quiz-banner">
@@ -249,7 +275,6 @@
                 <div class="lista-opcoes" id="quiz-box-opcoes"></div>
                 <div class="txt-feedback" id="quiz-feedback"></div>
                 
-                <!-- Botão de controle de avanço do Quiz -->
                 <button id="btn-proximo-quiz" class="btn-principal" style="display: none; margin-top: 20px;" onclick="avancarPerguntaQuiz()">Próxima Pergunta</button>
             </div>
             <div class="secao-jogos-rodape">
@@ -259,7 +284,6 @@
         </div>
     </div>
 
-    <!-- TELA 5: PERFIL (DILIGENTE COM NOTA ATUALIZADA E TROCA DE AVATAR) -->
     <div id="tela-perfil" class="tela">
         <div class="navbar-topo">
             <button style="background:none; border:none; color:white; font-weight:bold; cursor:pointer; font-size:1rem;" onclick="mudarTela('tela-home')">⬅ Voltar para o Jogo</button>
@@ -267,7 +291,6 @@
             <div></div>
         </div>
         <div class="container-perfil">
-            <!-- Foto grande que muda dinamicamente -->
             <div class="avatar-grande" id="perfil-avatar-visual">👦🏽</div>
             
             <div style="color: #444; font-weight: bold; margin-bottom: 5px;">Trocar Foto de Perfil:</div>
@@ -280,18 +303,90 @@
             </div>
 
             <div class="info-perfil-box">
-                <div>Nome do Aluno: <span>Estudante UMC</span></div>
-                <div>E-mail Registrado: <span>aluno.es@umc.edu.br</span></div>
-                <!-- Nota do Aluno integrada dinamicamente aqui -->
+                <div>Nome do Aluno: <span id="perfil-nome">Estudante UMC</span></div>
+                <div>E-mail Registrado: <span id="perfil-email">aluno.es@umc.edu.br</span></div>
                 <div>Nota até o Momento (Pontuação): <span id="perfil-xp-contador" style="color:var(--cor-correta); font-weight:bold; font-size:1.2rem;">0 XP 🚀</span></div>
             </div>
             <button class="btn-principal" style="background-color: var(--cor-errada);" onclick="mudarTela('tela-login')">Sair do Painel</button>
         </div>
     </div>
 
-    <!-- SISTEMA DE INTELIGÊNCIA JAVASCRIPT -->
+    <div id="tela-professor" class="tela">
+        <div class="dashboard-professor">
+            <div class="dash-header">
+                <div>
+                    <h2 style="margin:0; font-size:1.5rem;">Painel do Docente - UMC</h2>
+                    <p style="margin:5px 0 0 0; opacity:0.7; font-size:0.9rem;">Gestão de Engenharia de Software 2026</p>
+                </div>
+                <button class="btn-principal" style="background-color:var(--cor-errada); margin:0; padding:10px 20px; width:auto; border-radius:5px;" onclick="mudarTela('tela-login')">Sair do Painel</button>
+            </div>
+
+            <div class="cards-metricas">
+                <div class="card">
+                    <h3>Alunos Ativos</h3>
+                    <p id="total-alunos">0</p>
+                </div>
+                <div class="card">
+                    <h3>Média de Performance</h3>
+                    <p id="media-xp">0 XP</p>
+                </div>
+                <div class="card">
+                    <h3>Região Crítica</h3>
+                    <p id="regiao-critica" style="color:var(--cor-errada);">Nordeste</p>
+                </div>
+            </div>
+
+            <div class="dash-secao">
+                <h3>Alunos Cadastrados e Evolução de Notas</h3>
+                <div class="tabela-wrapper">
+                    <table id="tabela-alunos">
+                        <thead>
+                            <tr>
+                                <th>Nome Completo</th>
+                                <th>E-mail Acadêmico</th>
+                                <th>Módulos Concluídos</th>
+                                <th>XP Acumulado</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="dash-secao">
+                <h3>Métricas de Erros Relativos por Região</h3>
+                <div class="grafico-barras">
+                    <div class="barra-container">
+                        <span class="label-regiao">Norte</span>
+                        <div class="barra-fundo"><div class="barra-progresso norte" style="width: 25%"></div></div>
+                        <span class="porcentagem">25% de erros</span>
+                    </div>
+                    <div class="barra-container">
+                        <span class="label-regiao">Nordeste</span>
+                        <div class="barra-fundo"><div class="barra-progresso nordeste" style="width: 68%"></div></div>
+                        <span class="porcentagem">68% de erros</span>
+                    </div>
+                    <div class="barra-container">
+                        <span class="label-regiao">Centro-Oeste</span>
+                        <div class="barra-fundo"><div class="barra-progresso centro" style="width: 45%"></div></div>
+                        <span class="porcentagem">45% de erros</span>
+                    </div>
+                    <div class="barra-container">
+                        <span class="label-regiao">Sudeste</span>
+                        <div class="barra-fundo"><div class="barra-progresso sudeste" style="width: 18%"></div></div>
+                        <span class="porcentagem">18% de erros</span>
+                    </div>
+                    <div class="barra-container">
+                        <span class="label-regiao">Sul</span>
+                        <div class="barra-fundo"><div class="barra-progresso sul" style="width: 30%"></div></div>
+                        <span class="porcentagem">30% de erros</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Banco de dados expandido com +2 perguntas por região (Totalizando 3 perguntas por bloco)
         const bancoDados = {
             "Norte": {
                 escuro: "var(--norte-escuro)", claro: "var(--norte-claro)",
@@ -315,7 +410,7 @@
                 escuro: "var(--centro-escuro)", claro: "var(--centro-claro)",
                 perguntas: [
                     { p: "Qual bioma de planície inundável atrai turistas para o Mato Grosso do Sul?", alts: [{ t: "A) Pantanal", c: true }, { t: "B) Amazônia", c: false }, { t: "C) Caatinga", c: false }, { t: "D) Pampa", c: false }] },
-                    { p: "Qual cidade planejada foi inaugurada em 1960 para ser a atual capital federal do país?", alts: [{ t: "A) Rio de Janeiro", c: false }, { t: "B) Goiânia", c: false }, { t: "C) Brasília", c: true }, { t: "D) Cuiabá", c: false }] },
+                    { p: "Qual cidade planejada foi inaugurada in 1960 para ser a atual capital federal do país?", alts: [{ t: "A) Rio de Janeiro", c: false }, { t: "B) Goiânia", c: false }, { t: "C) Brasília", c: true }, { t: "D) Cuiabá", c: false }] },
                     { p: "Qual gênero de música de raiz e dancinha country é o polo econômico e cultural de Goiás?", alts: [{ t: "A) Funk", c: false }, { t: "B) Sertanejo", c: true }, { t: "C) Rock", c: false }, { t: "D) MPB", c: false }] }
                 ],
                 jogos: ["Pantanal Selvagem", "Cerrado Protegido", "Planalto Central"], icones: ["🐆", "🌱", "🏛️"]
@@ -344,27 +439,163 @@
         let notaXPGlobal = 0;
         let regiaoAtivaNome = "";
         let indicePerguntaFase = 0;
+        let emailUsuarioLogado = "";
 
-        // Função para mostrar/ocultar senha (O Olhinho do formulário)
-        function toggleSenha(idInput) {
-            const input = document.getElementById(idInput);
-            if (input.type === "password") {
-                input.type = "text";
-            } else {
-                input.type = "password";
-            }
+        // BANCO DE DADOS LOCAL (MOCK SIMULADO)
+        const alunosIniciais = [
+            { nome: "Ana Beatriz", email: "ana.silva@umc.edu.br", regioes: "Sudeste, Sul", xp: 60 },
+            { nome: "Carlos Eduardo", email: "carlos.s@umc.edu.br", regioes: "Sudeste", xp: 30 },
+            { nome: "Rodrigo Almeida", email: "aluno.es@umc.edu.br", regioes: "Nenhuma", xp: 0 }
+        ];
+
+        if (!localStorage.getItem('bancoAlunos')) {
+            localStorage.setItem('bancoAlunos', JSON.stringify(alunosIniciais));
         }
 
-        // Troca de Telas Básica
+        function toggleSenha(idInput) {
+            const input = document.getElementById(idInput);
+            input.type = (input.type === "password") ? "text" : "password";
+        }
+
         function mudarTela(idTela) {
             document.querySelectorAll('.tela').forEach(t => t.classList.remove('ativa'));
             document.getElementById(idTela).classList.add('ativa');
+
+            if (idTela === 'tela-professor') {
+                carregarPainelProfessor();
+            }
+            if (idTela === 'tela-perfil') {
+                carregarDadosPerfil();
+            }
         }
 
-        // Inicia o Quiz do zero para a região selecionada
+        // SISTEMA DE LOGIN COM SEPARAÇÃO DE NÍVEL (ALUNO VS PROFESSOR)
+        function executarLogin() {
+            const email = document.getElementById('login-email').value.trim();
+            const senha = document.getElementById('senha-login').value;
+
+            if (!email || !senha) {
+                alert("Preencha todos os campos para entrar.");
+                return;
+            }
+
+            // Acesso Master do Professor
+            if (email === "professor@escola.edu.br" && senha === "umc2026") {
+                emailUsuarioLogado = "PROFESSOR";
+                mudarTela('tela-professor');
+                return;
+            }
+
+            // Busca de Aluno no Banco Local
+            const bancoAlunos = JSON.parse(localStorage.getItem('bancoAlunos'));
+            const aluno = bancoAlunos.find(a => a.email === email);
+
+            if (aluno) {
+                emailUsuarioLogado = aluno.email;
+                notaXPGlobal = aluno.xp; 
+                alert(`Olá, ${aluno.nome}! Bom jogo.`);
+                mudarTela('tela-home');
+            } else {
+                alert("Usuário não cadastrado! Para testar como docente use:\nE-mail: professor@escola.edu.br\nSenha: umc2026");
+            }
+        }
+
+        // SISTEMA DE CADASTRO REAL COM PERSISTÊNCIA LOCAL
+        function executarCadastro() {
+            const nome = document.getElementById('cad-nome').value.trim();
+            const email = document.getElementById('cad-email').value.trim();
+            const senha = document.getElementById('senha-cadastro').value;
+
+            if (!nome || !email || !senha) {
+                alert("Preencha todos os campos do formulário.");
+                return;
+            }
+
+            if (senha.length < 8) {
+                alert("Por motivos de segurança acadêmica, a senha deve conter ao menos 8 caracteres.");
+                return;
+            }
+
+            const bancoAlunos = JSON.parse(localStorage.getItem('bancoAlunos'));
+
+            if (bancoAlunos.some(a => a.email === email)) {
+                alert("Este e-mail institucional já se encontra registrado!");
+                return;
+            }
+
+            bancoAlunos.push({
+                nome: nome,
+                email: email,
+                regioes: "Nenhuma",
+                xp: 0
+            });
+
+            localStorage.setItem('bancoAlunos', JSON.stringify(bancoAlunos));
+            alert("Cadastro concluído com sucesso! Prossiga com o Login.");
+            mudarTela('tela-login');
+        }
+
+        function carregarDadosPerfil() {
+            if (emailUsuarioLogado && emailUsuarioLogado !== "PROFESSOR") {
+                const bancoAlunos = JSON.parse(localStorage.getItem('bancoAlunos'));
+                const aluno = bancoAlunos.find(a => a.email === emailUsuarioLogado);
+                if (aluno) {
+                    document.getElementById('perfil-nome').innerText = aluno.nome;
+                    document.getElementById('perfil-email').innerText = aluno.email;
+                    document.getElementById('perfil-xp-contador').innerText = aluno.xp + " XP 🚀";
+                }
+            }
+        }
+
+        function sincronizarProgressoNoBanco(regConcluida) {
+            if (!emailUsuarioLogado || emailUsuarioLogado === "PROFESSOR") return;
+
+            const bancoAlunos = JSON.parse(localStorage.getItem('bancoAlunos'));
+            const idx = bancoAlunos.findIndex(a => a.email === emailUsuarioLogado);
+
+            if (idx !== -1) {
+                bancoAlunos[idx].xp = notaXPGlobal;
+
+                if (regConcluida) {
+                    let r = bancoAlunos[idx].regioes;
+                    if (r === "Nenhuma") {
+                        bancoAlunos[idx].regioes = regConcluida;
+                    } else if (!r.includes(regConcluida)) {
+                        bancoAlunos[idx].regioes += ", " + regConcluida;
+                    }
+                }
+                localStorage.setItem('bancoAlunos', JSON.stringify(bancoAlunos));
+            }
+        }
+
+        // CARREGA E INJETA DADOS DINÂMICOS NO DASHBOARD DO PROFESSOR
+        function carregarPainelProfessor() {
+            const bancoAlunos = JSON.parse(localStorage.getItem('bancoAlunos'));
+            const tabelaCorpo = document.querySelector('#tabela-alunos tbody');
+            tabelaCorpo.innerHTML = "";
+
+            let somaXP = 0;
+
+            bancoAlunos.forEach(aluno => {
+                somaXP += aluno.xp;
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${aluno.nome}</strong></td>
+                    <td>${aluno.email}</td>
+                    <td><span style="color:var(--amarelo-destaque); font-weight:600;">${aluno.regioes}</span></td>
+                    <td><strong>${aluno.xp} XP</strong></td>
+                `;
+                tabelaCorpo.appendChild(tr);
+            });
+
+            document.getElementById('total-alunos').innerText = bancoAlunos.length;
+            const media = bancoAlunos.length > 0 ? Math.round(somaXP / bancoAlunos.length) : 0;
+            document.getElementById('media-xp').innerText = `${media} XP`;
+        }
+
         function iniciarQuizRegiao(regiaoNome) {
             regiaoAtivaNome = regiaoNome;
-            indicePerguntaFase = 0; // Começa na pergunta 1
+            indicePerguntaFase = 0;
             
             const dados = bancoDados[regiaoNome];
             document.getElementById('quiz-banner').style.backgroundColor = dados.escuro;
@@ -372,7 +603,6 @@
             document.getElementById('quiz-titulo-jogos').style.color = dados.escuro;
             document.getElementById('quiz-titulo-regiao').innerText = regiaoNome.toUpperCase();
 
-            // Renderiza os minijogos do rodapé da tela de quiz
             const boxCards = document.getElementById('quiz-cards-jogos');
             boxCards.innerHTML = "";
             dados.jogos.forEach((jogo, i) => {
@@ -388,18 +618,15 @@
             mudarTela('tela-quiz');
         }
 
-        // Alimenta o HTML com a pergunta ativa do índice
         function carregarQuestaoEspecifica() {
             const dadosRegiao = bancoDados[regiaoAtivaNome];
             const perguntaObjeto = dadosRegiao.perguntas[indicePerguntaFase];
 
-            // Atualiza números indicadores
             document.getElementById('quiz-numero-atual').innerText = (indicePerguntaFase + 1);
             document.getElementById('quiz-enunciado').innerText = perguntaObjeto.p;
             document.getElementById('quiz-feedback').innerText = "";
             document.getElementById('btn-proximo-quiz').style.display = "none";
 
-            // Limpa e injeta alternativas
             const boxOpcoes = document.getElementById('quiz-box-opcoes');
             boxOpcoes.innerHTML = "";
             perguntaObjeto.alts.forEach(alt => {
@@ -412,53 +639,47 @@
             });
         }
 
-        // Valida clique do usuário
         function processarRespostaSelecionada(btnClicado, ehCorreta, todasAlts) {
             const botoes = document.querySelectorAll('.btn-alternativa-quiz');
-            botoes.forEach(b => b.disabled = true); // bloqueia outros cliques
+            botoes.forEach(b => b.disabled = true);
 
             const feedback = document.getElementById('quiz-feedback');
-            const btnAvanço = document.getElementById('btn-proximo-quiz');
+            const btnAvanco = document.getElementById('btn-proximo-quiz');
 
             if (ehCorreta) {
                 btnClicado.classList.add('correta');
                 feedback.innerHTML = "<span style='color:var(--cor-correta)'>🎉 Resposta Correta! +10 XP</span>";
                 notaXPGlobal += 10;
-                atualizarExibicaoPontosPerfil();
+                sincronizarProgressoNoBanco(false);
             } else {
                 btnClicado.classList.add('errada');
                 feedback.innerHTML = "<span style='color:var(--cor-errada)'>❌ Resposta Incorreta!</span>";
-                // Destaca onde estava a certa para feedback educacional
                 let idxCerta = todasAlts.findIndex(a => a.c);
                 botoes[idxCerta].classList.add('correta');
             }
 
-            // Define se avança para próxima pergunta ou se fecha a régua de 3 perguntas
             if (indicePerguntaFase < 2) {
-                btnAvanço.innerText = "Próxima Pergunta ➡️";
+                btnAvanco.innerText = "Próxima Pergunta ➡️";
             } else {
-                btnAvanço.innerText = "Finalizar Região e Salvar 🏁";
+                btnAvanco.innerText = "Finalizar Região e Salvar 🏁";
             }
-            btnAvanço.style.display = "block";
+            btnAvanco.style.display = "block";
         }
 
-        // Avança na esteira de perguntas do Quiz
         function avancarPerguntaQuiz() {
             if (indicePerguntaFase < 2) {
                 indicePerguntaFase++;
                 carregarQuestaoEspecifica();
             } else {
-                // Chegou ao fim das 3 perguntas da região, volta pro mapa
+                sincronizarProgressoNoBanco(regiaoAtivaNome);
                 mudarTela('tela-home');
             }
         }
 
-        // Sincroniza a nota (XP) ganha com o HTML do Painel de Perfil
         function atualizarExibicaoPontosPerfil() {
             document.getElementById('perfil-xp-contador').innerText = notaXPGlobal + " XP 🚀";
         }
 
-        // Troca de Foto do Perfil (Muda o Emoji)
         function atualizarFotoPerfil(emojiSelecionado) {
             document.getElementById('perfil-avatar-visual').innerText = emojiSelecionado;
         }
