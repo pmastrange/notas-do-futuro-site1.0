@@ -85,7 +85,6 @@
             opacity: 0.7; transition: opacity 0.2s; padding: 0; margin: 0;
         }
         .btn-olho:hover { opacity: 1; }
-        .dica-senha { display: block; font-size: 0.75rem; color: #E0E0E0; margin-top: 5px; opacity: 0.8; }
 
         .btn-principal {
             background: var(--amarelo-destaque); color: white; border: none; padding: 14px; width: 100%;
@@ -161,7 +160,7 @@
         
         .info-perfil-box { background: white; padding: 25px; border-radius: 15px; text-align: left; box-shadow: 0 6px 15px rgba(0,0,0,0.05); margin-bottom: 25px; }
         .info-perfil-box div { margin-bottom: 16px; font-weight: bold; color: #555; font-size: 0.95rem; }
-        .info-perfil-box span { display: block; font-weight: normal; color: #333; margin-top: 6px; border-bottom: 2px solid var(--corbege); padding-bottom: 4px; font-size: 1.05rem; }
+        .info-perfil-box span { display: block; font-weight: normal; color: #333; margin-top: 6px; border-bottom: 2px solid var(--cor-bege); padding-bottom: 4px; font-size: 1.05rem; }
 
         /* ========================================================
            ESTILOS: PAINEL DO PROFESSOR (DASHBOARD)
@@ -204,12 +203,12 @@
                 <div class="sub-auth">Selecione o seu tipo de acesso:</div>
                 
                 <div class="abas-tipo-usuario">
-                    <button id="btn-aba-aluno" class="aba-btn ativa" onclick="mudarTipoAcesso('aluno')">Aluno</button>
+                    <button id="btn-aba-aluno" class="aba-btn ativa" onclick="mudarTipoAcesso('aluno')">Alunos</button>
                     <button id="btn-aba-prof" class="aba-btn" onclick="mudarTipoAcesso('professor')">Professor</button>
                 </div>
 
                 <div id="container-social-google">
-                    <button class="btn-google" onclick="mudarTela('tela-home')">🌐 Continuar com Google</button>
+                    <button class="btn-google" onclick="executarLoginComGoogle()">🌐 Continuar com Google</button>
                     <div class="divisor">Ou insira seu Login</div>
                 </div>
 
@@ -220,10 +219,9 @@
                 <div class="campo-input">
                     <label>Senha</label>
                     <div class="wrapper-senha">
-                        <input type="password" id="senha-login" value="123456" placeholder="Mínimo 8 caracteres">
+                        <input type="password" id="senha-login" placeholder="Mínimo 8 caracteres" autocomplete="new-password">
                         <button type="button" class="btn-olho" onclick="toggleSenha('senha-login')">👁️</button>
                     </div>
-                    <span class="dica-senha">⚠️ Mínimo 8 caracteres</span>
                 </div>
                 <button class="btn-principal" id="btn-acao-login" onclick="executarLogin()">Entrar como Aluno</button>
                 <div class="link-alternativo" id="link-registro-aluno">Não tem uma conta? <span onclick="mudarTela('tela-cadastro')">Junte-se a nós</span></div>
@@ -247,10 +245,9 @@
                 <div class="campo-input">
                     <label>Senha</label>
                     <div class="wrapper-senha">
-                        <input type="password" id="senha-cadastro" placeholder="Mínimo 8 caracteres">
+                        <input type="password" id="senha-cadastro" placeholder="Mínimo 8 caracteres" autocomplete="new-password">
                         <button type="button" class="btn-olho" onclick="toggleSenha('senha-cadastro')">👁️</button>
                     </div>
-                    <span class="dica-senha">⚠️ Mínimo 8 caracteres</span>
                 </div>
                 <button class="btn-principal" onclick="executarCadastro()">Cadastrar</button>
                 <div class="link-alternativo">Já tem uma conta? <span onclick="mudarTela('tela-login')">Entrar</span></div>
@@ -319,7 +316,7 @@
                 <div>E-mail Registrado: <span id="perfil-email">aluno@escola.edu.br</span></div>
                 <div>Nota até o Momento (Pontuação): <span id="perfil-xp-contador" style="color:var(--cor-correta); font-weight:bold; font-size:1.2rem;">0 XP 🚀</span></div>
             </div>
-            <button class="btn-principal" style="background-color: var(--cor-errada);" onclick="mudarTela('tela-login')">Sair do Panel</button>
+            <button class="btn-principal" style="background-color: var(--cor-errada);" onclick="mudarTela('tela-login')">Sair do Painel</button>
         </div>
     </div>
 
@@ -425,7 +422,7 @@
                 escuro: "var(--centro-escuro)", claro: "var(--centro-claro)",
                 perguntas: [
                     { p: "Qual bioma de planície inundável atrai turistas para o Mato Grosso do Sul?", alts: [{ t: "A) Pantanal", c: true }, { t: "B) Amazônia", c: false }, { t: "C) Caatinga", c: false }, { t: "D) Pampa", c: false }] },
-                    { p: "Qual cidade planejada foi inaugurada em 1960 para ser a atual capital federal do país?", alts: [{ t: "A) Rio de Janeiro", c: false }, { t: "B) Goiânia", c: false }, { t: "C) Brasília", c: true }, { t: "D) Cuiabá", c: false }] },
+                    { p: "Qual cidade planejada foi inaugurada in 1960 para ser a atual capital federal do país?", alts: [{ t: "A) Rio de Janeiro", c: false }, { t: "B) Goiânia", c: false }, { t: "C) Brasília", c: true }, { t: "D) Cuiabá", c: false }] },
                     { p: "Qual gênero de música de raiz é o polo econômico e cultural de Goiás?", alts: [{ t: "A) Funk", c: false }, { t: "B) Sertanejo", c: true }, { t: "C) Rock", c: false }, { t: "D) MPB", c: false }] }
                 ],
                 jogos: ["Pantanal Selvagem", "Cerrado Protegido", "Planalto Central"], icones: ["🐆", "🌱", "🏛️"]
@@ -505,27 +502,49 @@
             }
         }
 
+        function executarLoginComGoogle() {
+            emailUsuarioLogado = "aluno@umc.edu.br";
+            document.getElementById('perfil-email').innerText = emailUsuarioLogado;
+            document.getElementById('perfil-nome').innerText = "Estudante UMC";
+            notaXPGlobal = 0;
+            document.getElementById('perfil-xp-contador').innerText = "0 XP 🚀";
+            document.getElementById('btn-voltar-dash').style.display = 'none';
+            mudarTela('tela-home');
+        }
+
         function executarLogin() {
-            const email = document.getElementById('login-email').value;
-            emailUsuarioLogado = email || (tipoAcessoSelecionado === 'aluno' ? "aluno@umc.edu.br" : "professor@umc.edu.br");
+            const email = document.getElementById('login-email').value || (tipoAcessoSelecionado === 'aluno' ? "aluno@umc.edu.br" : "professor@umc.edu.br");
+            emailUsuarioLogado = email;
             
             if (tipoAcessoSelecionado === 'aluno') {
-                document.getElementById('perfil-email').innerText = emailUsuarioLogado;
-                document.getElementById('btn-voltar-dash').style.display = "none";
+                document.getElementById('perfil-email').innerText = email;
+                const alunos = JSON.parse(localStorage.getItem('bancoAlunos')) || [];
+                const aluno = alunos.find(a => a.email === email) || { nome: "Estudante UMC", xp: 0 };
+                document.getElementById('perfil-nome').innerText = aluno.nome;
+                notaXPGlobal = aluno.xp;
+                document.getElementById('perfil-xp-contador').innerText = `${notaXPGlobal} XP 🚀`;
+                
+                document.getElementById('btn-voltar-dash').style.display = 'none';
                 mudarTela('tela-home');
             } else {
-                document.getElementById('btn-voltar-dash').style.display = "block";
                 mudarTela('tela-professor');
             }
         }
 
         function executarCadastro() {
-            alert("Cadastro realizado (Simulação)!");
+            const nome = document.getElementById('cad-nome').value || "Novo Aluno";
+            const email = document.getElementById('cad-email').value || "aluno.novo@umc.edu.br";
+            
+            const alunos = JSON.parse(localStorage.getItem('bancoAlunos')) || [];
+            if(alunos.some(a => a.email === email)) {
+                alert("Este e-mail já está cadastrado.");
+                return;
+            }
+            alunos.push({ nome: nome, email: email, regioes: "Nenhuma", xp: 0 });
+            localStorage.setItem('bancoAlunos', JSON.stringify(alunos));
+            
+            alert("Cadastro realizado com sucesso!");
             mudarTela('tela-login');
-        }
-
-        function atualizarFotoPerfil(emoji) {
-            document.getElementById('perfil-avatar-visual').innerText = emoji;
         }
 
         function iniciarQuizRegiao(regiao) {
@@ -533,21 +552,25 @@
             indicePerguntaFase = 0;
             
             const dados = bancoDados[regiao];
-            document.getElementById('quiz-banner').style.backgroundColor = dados.escuro;
-            document.getElementById('quiz-titulo-regiao').innerText = regiao.toUpperCase();
+            const banner = document.getElementById('quiz-banner');
+            banner.style.backgroundColor = dados.escuro;
             
-            const cardsContainer = document.getElementById('quiz-cards-jogos');
-            cardsContainer.innerHTML = "";
+            document.getElementById('quiz-titulo-regiao').innerText = regiao.toUpperCase();
+            document.getElementById('quiz-tag-cor').style.color = dados.escuro;
+            
+            carregarPerguntaQuiz();
+            
+            const boxJogos = document.getElementById('quiz-cards-jogos');
+            boxJogos.innerHTML = "";
             dados.jogos.forEach((jogo, i) => {
-                cardsContainer.innerHTML += `
+                boxJogos.innerHTML += `
                     <div class="card-mini">
                         <div class="thumb-icon">${dados.icones[i]}</div>
-                        ${jogo}
+                        <div>${jogo}</div>
                     </div>
                 `;
             });
-
-            carregarPerguntaQuiz();
+            
             mudarTela('tela-quiz');
         }
 
@@ -557,70 +580,67 @@
             
             document.getElementById('quiz-numero-atual').innerText = indicePerguntaFase + 1;
             document.getElementById('quiz-enunciado').innerText = pergunta.p;
+            document.getElementById('quiz-feedback').innerText = "";
+            document.getElementById('btn-proximo-quiz').style.display = "none";
             
             const boxOpcoes = document.getElementById('quiz-box-opcoes');
             boxOpcoes.innerHTML = "";
             
-            document.getElementById('quiz-feedback').innerText = "";
-            document.getElementById('btn-proximo-quiz').style.display = "none";
-
-            pergunta.alts.forEach((alt, index) => {
+            pergunta.alts.forEach((alt, i) => {
                 const btn = document.createElement('button');
-                btn.className = "btn-alternativa-quiz";
+                btn.className = 'btn-alternativa-quiz';
                 btn.style.backgroundColor = dados.claro;
-                btn.style.color = "var(--cor-texto)";
+                btn.style.color = '#333';
                 btn.innerText = alt.t;
-                btn.onclick = () => verificarResposta(index, alt.c, btn);
+                btn.onclick = () => verificarResposta(btn, alt.c);
                 boxOpcoes.appendChild(btn);
             });
         }
 
-        function verificarResposta(index, correta, btnSelecionado) {
-            const boxOpcoes = document.getElementById('quiz-box-opcoes');
-            Array.from(boxOpcoes.children).forEach(btn => btn.disabled = true);
+        function verificarResposta(botaoClicado, eCorreta) {
+            const opcoes = document.querySelectorAll('.btn-alternativa-quiz');
+            opcoes.forEach(btn => btn.disabled = true);
             
             const feedback = document.getElementById('quiz-feedback');
-            const btnProximo = document.getElementById('btn-proximo-quiz');
-
-            if (correta) {
-                btnSelecionado.classList.add('correta');
+            
+            if (eCorreta) {
+                botaoClicado.classList.add('correta');
                 feedback.innerText = "🎉 Resposta Correta! +10 XP";
                 feedback.style.color = "var(--cor-correta)";
                 notaXPGlobal += 10;
-                document.getElementById('perfil-xp-contador').innerText = `${notaXPGlobal} XP 🚀`;
-                salvarDadosProgresso();
+                atualizarXpNoBancoLocal();
             } else {
-                btnSelecionado.classList.add('errada');
-                feedback.innerText = "❌ Resposta Incorreta!";
+                botaoClicado.classList.add('errada');
+                feedback.innerText = "❌ Resposta Errada! Tente na próxima.";
                 feedback.style.color = "var(--cor-errada)";
                 
                 const dados = bancoDados[regiaoAtivaNome];
                 const pergunta = dados.perguntas[indicePerguntaFase];
-                const corretoIndex = pergunta.alts.findIndex(a => a.c);
-                boxOpcoes.children[corretoIndex].classList.add('correta');
+                opcoes.forEach((btn, idx) => {
+                    if (pergunta.alts[idx].c) {
+                        btn.classList.add('correta');
+                    }
+                });
             }
-
-            if (indicePerguntaFase < 2) {
-                btnProximo.innerText = "Próxima Pergunta →";
-            } else {
-                btnProximo.innerText = "Finalizar Região 🏁";
-            }
-            btnProximo.style.display = "block";
+            
+            document.getElementById('btn-proximo-quiz').style.display = "inline-block";
         }
 
         function avancarPerguntaQuiz() {
             indicePerguntaFase++;
-            if (indicePerguntaFase < 3) {
+            const dados = bancoDados[regiaoAtivaNome];
+            if (indicePerguntaFase < dados.perguntas.length) {
                 carregarPerguntaQuiz();
             } else {
-                alert(`Parabéns! Você concluiu a Região ${regiaoAtivaNome}!`);
+                alert(`Parabéns! Você concluiu o módulo da Região ${regiaoAtivaNome}!`);
                 mudarTela('tela-home');
             }
         }
 
-        function salvarDadosProgresso() {
-            let alunos = JSON.parse(localStorage.getItem('bancoAlunos')) || [];
-            let idx = alunos.findIndex(a => a.email === emailUsuarioLogado);
+        function atualizarXpNoBancoLocal() {
+            document.getElementById('perfil-xp-contador').innerText = `${notaXPGlobal} XP 🚀`;
+            const alunos = JSON.parse(localStorage.getItem('bancoAlunos')) || [];
+            const idx = alunos.findIndex(a => a.email === emailUsuarioLogado);
             if (idx !== -1) {
                 alunos[idx].xp = notaXPGlobal;
                 if (alunos[idx].regioes === "Nenhuma") {
@@ -632,6 +652,10 @@
             }
         }
 
+        function atualizarFotoPerfil(emoji) {
+            document.getElementById('perfil-avatar-visual').innerText = emoji;
+        }
+
         function atualizarDashboardProfessor() {
             const alunos = JSON.parse(localStorage.getItem('bancoAlunos')) || [];
             document.getElementById('total-alunos').innerText = alunos.length;
@@ -640,20 +664,21 @@
             const tbody = document.querySelector('#tabela-alunos tbody');
             tbody.innerHTML = "";
             
-            alunos.forEach(a => {
-                totalXp += a.xp;
+            alunos.forEach(aluno => {
+                totalXp += aluno.xp;
                 tbody.innerHTML += `
                     <tr>
-                        <td>${a.nome}</td>
-                        <td>${a.email}</td>
-                        <td>${a.regioes}</td>
-                        <td><strong style="color:var(--amarelo-destaque)">${a.xp} XP</strong></td>
+                        <td>${aluno.nome}</td>
+                        <td>${aluno.email}</td>
+                        <td>${aluno.regioes}</td>
+                        <td>${aluno.xp} XP</td>
                     </tr>
                 `;
             });
             
             const media = alunos.length ? Math.round(totalXp / alunos.length) : 0;
             document.getElementById('media-xp').innerText = `${media} XP`;
+            document.getElementById('btn-voltar-dash').style.display = 'block';
         }
     </script>
 </body>
