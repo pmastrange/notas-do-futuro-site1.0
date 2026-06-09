@@ -217,7 +217,7 @@
 
                 <div class="campo-input">
                     <label>E-mail Acadêmico</label>
-                    <input type="email" id="login-email" placeholder="aluno.es@escola.edu.br">
+                    <input type="email" id="login-email" placeholder="aluno.es@umc.edu.br">
                 </div>
                 <div class="campo-input">
                     <label>Senha</label>
@@ -245,7 +245,7 @@
                 </div>
                 <div class="campo-input">
                     <label>E-mail</label>
-                    <input type="email" id="cad-email" placeholder="seu-email@escola.br">
+                    <input type="email" id="cad-email" placeholder="seu-email@umc.br">
                 </div>
                 <div class="campo-input">
                     <label>Senha</label>
@@ -323,7 +323,7 @@
 
             <div class="info-perfil-box">
                 <div>Nome do Aluno: <span id="perfil-nome">Estudante UMC</span></div>
-                <div>E-mail Registrado: <span id="perfil-email">aluno.es@escola.edu.br</span></div>
+                <div>E-mail Registrado: <span id="perfil-email">aluno.es@umc.edu.br</span></div>
                 <div>Nota até o Momento (Pontuação): <span id="perfil-xp-contador" style="color:var(--cor-correta); font-weight:bold; font-size:1.2rem;">0 XP 🚀</span></div>
             </div>
             <button class="btn-principal" style="background-color: var(--cor-errada);" onclick="mudarTela('tela-login')">Sair do Painel</button>
@@ -335,7 +335,7 @@
         <div class="dashboard-professor">
             <div class="dash-header">
                 <div>
-                    <h2 style="margin:0; font-size:1.5rem;">Painel do Docente - ESCOLA</h2>
+                    <h2 style="margin:0; font-size:1.5rem;">Painel do Docente - UMC</h2>
                     <p style="margin:5px 0 0 0; opacity:0.7; font-size:0.9rem;">Gestão de Engenharia de Software 2026</p>
                 </div>
                 <div style="display:flex; gap:10px;">
@@ -468,9 +468,9 @@
 
         // BANCO DE DADOS LOCAL (MOCK SIMULADO)
         const alunosIniciais = [
-            { nome: "Ana Beatriz", email: "ana.silva@escola.edu.br", regioes: "Sudeste, Sul", xp: 60 },
-            { nome: "Carlos Eduardo", email: "carlos.s@escola.edu.br", regioes: "Sudeste", xp: 30 },
-            { nome: "Rodrigo Almeida", email: "aluno.es@escola.edu.br", regioes: "Nenhuma", xp: 0 }
+            { nome: "Ana Beatriz", email: "ana.silva@umc.edu.br", regioes: "Sudeste, Sul", xp: 60 },
+            { nome: "Carlos Eduardo", email: "carlos.s@umc.edu.br", regioes: "Sudeste", xp: 30 },
+            { nome: "Rodrigo Almeida", email: "aluno.es@umc.edu.br", regioes: "Nenhuma", xp: 0 }
         ];
 
         if (!localStorage.getItem('bancoAlunos')) {
@@ -497,7 +497,7 @@
             if (tipo === 'aluno') {
                 document.getElementById('btn-aba-aluno').classList.add('ativa');
                 inputEmail.value = "";
-                inputEmail.placeholder = "aluno.es@escola.edu.br";
+                inputEmail.placeholder = "aluno.es@umc.edu.br";
                 inputSenha.value = "";
                 btnAcao.innerText = "Entrar como Aluno";
                 containerGoogle.style.display = "block";
@@ -505,7 +505,7 @@
             } else {
                 document.getElementById('btn-aba-prof').classList.add('ativa');
                 // Auto preenche para facilitar testes da banca/professor
-                inputEmail.value = "professor@escola.edu.br"; 
+                inputEmail.value = "professor@umc.edu.br"; 
                 inputSenha.value = "umc2026";
                 btnAcao.innerText = "Acessar Painel do Docente";
                 containerGoogle.style.display = "none";
@@ -544,11 +544,11 @@
             }
 
             if (tipoAcessoSelecionado === "professor") {
-                if (email === "professor@escola.edu.br" && senha === "umc2026") {
+                if (email === "professor@umc.edu.br" && senha === "umc2026") {
                     emailUsuarioLogado = "PROFESSOR";
                     mudarTela('tela-professor');
                 } else {
-                    alert("Credenciais de Professor incorretas!\nUse: professor@escola.edu.br / umc2026");
+                    alert("Credenciais de Professor incorretas!\nUse: professor@umc.edu.br / umc2026");
                 }
                 return;
             }
@@ -607,7 +607,7 @@
                 }
             } else if (emailUsuarioLogado === "PROFESSOR") {
                 document.getElementById('perfil-nome').innerText = "Professor Administrador";
-                document.getElementById('perfil-email').innerText = "professor@escola.edu.br";
+                document.getElementById('perfil-email').innerText = "professor@umc.edu.br";
                 document.getElementById('perfil-xp-contador').innerText = "N/A (Modo Admin)";
             }
         }
