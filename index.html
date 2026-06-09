@@ -217,7 +217,7 @@
 
                 <div class="campo-input">
                     <label>E-mail Acadêmico</label>
-                    <input type="email" id="login-email" placeholder="aluno.es@umc.edu.br">
+                    <input type="email" id="login-email" placeholder="aluno@escola.edu.br">
                 </div>
                 <div class="campo-input">
                     <label>Senha</label>
@@ -323,7 +323,7 @@
 
             <div class="info-perfil-box">
                 <div>Nome do Aluno: <span id="perfil-nome">Estudante UMC</span></div>
-                <div>E-mail Registrado: <span id="perfil-email">aluno.es@umc.edu.br</span></div>
+                <div>E-mail Registrado: <span id="perfil-email">aluno@escola.edu.br</span></div>
                 <div>Nota até o Momento (Pontuação): <span id="perfil-xp-contador" style="color:var(--cor-correta); font-weight:bold; font-size:1.2rem;">0 XP 🚀</span></div>
             </div>
             <button class="btn-principal" style="background-color: var(--cor-errada);" onclick="mudarTela('tela-login')">Sair do Painel</button>
@@ -470,7 +470,7 @@
         const alunosIniciais = [
             { nome: "Ana Beatriz", email: "ana.silva@umc.edu.br", regioes: "Sudeste, Sul", xp: 60 },
             { nome: "Carlos Eduardo", email: "carlos.s@umc.edu.br", regioes: "Sudeste", xp: 30 },
-            { nome: "Rodrigo Almeida", email: "aluno.es@umc.edu.br", regioes: "Nenhuma", xp: 0 }
+            { nome: "Rodrigo Almeida", email: "aluno@umc.edu.br", regioes: "Nenhuma", xp: 0 }
         ];
 
         if (!localStorage.getItem('bancoAlunos')) {
@@ -497,7 +497,7 @@
             if (tipo === 'aluno') {
                 document.getElementById('btn-aba-aluno').classList.add('ativa');
                 inputEmail.value = "";
-                inputEmail.placeholder = "aluno.es@umc.edu.br";
+                inputEmail.placeholder = "aluno@umc.edu.br";
                 inputSenha.value = "";
                 btnAcao.innerText = "Entrar como Aluno";
                 containerGoogle.style.display = "block";
